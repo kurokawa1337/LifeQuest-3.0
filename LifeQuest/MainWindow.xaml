@@ -1,0 +1,138 @@
+<Window x:Class="LifeQuest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LifeQuest" Height="760" Width="1140"
+        MinHeight="620" MinWidth="920"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BgBrush}"
+        FontFamily="Segoe UI">
+    <Grid>
+        <Grid x:Name="AuthScreen">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{DynamicResource AccentColor}" Offset="0"/>
+                    <GradientStop Color="{DynamicResource AccentColor2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Border Style="{StaticResource Card}" Width="420" VerticalAlignment="Center"
+                    HorizontalAlignment="Center" Padding="34">
+                <StackPanel>
+                    <TextBlock Text="⚔ LifeQuest" FontSize="34" FontWeight="Bold"
+                               HorizontalAlignment="Center" Foreground="{DynamicResource AccentBrush}"/>
+                    <TextBlock x:Name="TaglineText" Style="{StaticResource Muted}"
+                               HorizontalAlignment="Center" Margin="0,4,0,22"/>
+
+                    <UniformGrid Columns="2" Margin="0,0,0,20">
+                        <Button x:Name="TabLogin" Content="Вхід" Click="TabLogin_Click"
+                                Style="{StaticResource BtnPrimary}" Margin="0,0,4,0"/>
+                        <Button x:Name="TabRegister" Content="Реєстрація" Click="TabRegister_Click"
+                                Style="{StaticResource BtnGhost}" Margin="4,0,0,0"/>
+                    </UniformGrid>
+
+                    <TextBlock x:Name="LblUsername" Text="Нікнейм" Style="{StaticResource Muted}" Margin="2,0,0,4"/>
+                    <TextBox x:Name="InpUsername" Style="{StaticResource Field}"/>
+
+                    <TextBlock x:Name="LblPassword" Text="Пароль" Style="{StaticResource Muted}" Margin="2,14,0,4"/>
+                    <PasswordBox x:Name="InpPassword" Style="{StaticResource FieldPw}"/>
+
+                    <StackPanel x:Name="RepeatRow">
+                        <TextBlock x:Name="LblRepeat" Text="Повтори пароль" Style="{StaticResource Muted}" Margin="2,14,0,4"/>
+                        <PasswordBox x:Name="InpPassword2" Style="{StaticResource FieldPw}"/>
+                    </StackPanel>
+
+                    <TextBlock x:Name="AuthError" Foreground="{DynamicResource DangerBrush}"
+                               TextWrapping="Wrap" Margin="2,12,0,0" Visibility="Collapsed"/>
+
+                    <Button x:Name="BtnSubmit" Content="Увійти" Click="AuthSubmit_Click"
+                            Style="{StaticResource BtnPrimary}" Margin="0,20,0,0"
+                            HorizontalAlignment="Stretch"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,18,0,0">
+                        <Button x:Name="LangUkBtn" Content="Українська" Click="LangUk_Click"
+                                Style="{StaticResource BtnGhost}" Padding="10,6" Margin="0,0,6,0" FontSize="12"/>
+                        <Button x:Name="LangEnBtn" Content="English" Click="LangEn_Click"
+                                Style="{StaticResource BtnGhost}" Padding="10,6" FontSize="12"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="AppShell" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="290"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="{DynamicResource SurfaceBrush}"
+                    BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,1,0">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top" Padding="20,22,20,16">
+                        <StackPanel>
+                            <Grid Width="72" Height="72" HorizontalAlignment="Left">
+                                <Ellipse x:Name="HeroAvatar">
+                                    <Ellipse.Fill><SolidColorBrush Color="{DynamicResource AccentColor}"/></Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock x:Name="HeroAvatarInitial" FontSize="30" FontWeight="Bold"
+                                           Foreground="{DynamicResource OnAccentBrush}"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                <TextBlock x:Name="HeroName" Style="{StaticResource H2}" VerticalAlignment="Center"/>
+                                <Border x:Name="DevBadge" Background="{DynamicResource WineBrush}" CornerRadius="5"
+                                        Padding="6,2" Margin="8,0,0,0" Visibility="Collapsed" VerticalAlignment="Center">
+                                    <TextBlock Text="DEV" Foreground="White" FontSize="10" FontWeight="Bold"/>
+                                </Border>
+                                <Border x:Name="PrestigeBadge" Background="{DynamicResource GoldBrush}" CornerRadius="5"
+                                        Padding="6,2" Margin="6,0,0,0" Visibility="Collapsed" VerticalAlignment="Center">
+                                    <TextBlock x:Name="PrestigeBadgeText" Foreground="White" FontSize="10" FontWeight="Bold"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                <TextBlock x:Name="HeroLevelRank" Style="{StaticResource Muted}"/>
+                                <TextBlock x:Name="HeroMult" Style="{StaticResource Muted}" Margin="10,0,0,0"
+                                           Foreground="{DynamicResource GoldBrush}"/>
+                            </StackPanel>
+                            <Border Background="{DynamicResource SurfaceAltBrush}" CornerRadius="6" Height="12" Margin="0,12,0,0">
+                                <Border x:Name="XpFill" Background="{DynamicResource AccentBrush}" CornerRadius="6"
+                                        HorizontalAlignment="Left" Width="0"/>
+                            </Border>
+                            <TextBlock x:Name="XpText" Style="{StaticResource Muted}" FontSize="11" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Button x:Name="LogoutBtn" DockPanel.Dock="Bottom" Content="Вийти" Click="Logout_Click"
+                            Style="{StaticResource BtnGhost}" Margin="16" />
+
+                    <StackPanel x:Name="NavPanel" Margin="12,8,12,0">
+                        <RadioButton x:Name="NavQuests" Content="Квести" Tag="quests" GroupName="nav"
+                                     Checked="Nav_Checked" Style="{StaticResource NavItem}" IsChecked="True"/>
+                        <RadioButton x:Name="NavStats" Content="Статистика" Tag="stats" GroupName="nav"
+                                     Checked="Nav_Checked" Style="{StaticResource NavItem}"/>
+                        <RadioButton x:Name="NavLeaders" Content="Таблиця лідерів" Tag="leaderboard" GroupName="nav"
+                                     Checked="Nav_Checked" Style="{StaticResource NavItem}"/>
+                        <RadioButton x:Name="NavSettings" Content="Налаштування" Tag="settings" GroupName="nav"
+                                     Checked="Nav_Checked" Style="{StaticResource NavItem}"/>
+                        <RadioButton x:Name="NavAdmin" Content="Перевірка" Tag="admin" GroupName="nav"
+                                     Checked="Nav_Checked" Style="{StaticResource NavItem}" Visibility="Collapsed"/>
+                        <RadioButton x:Name="NavDev" Content="Реж. розробника" Tag="dev" GroupName="nav"
+                                     Checked="Nav_Checked" Style="{StaticResource NavItem}" Visibility="Collapsed"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <ContentControl x:Name="ContentHost" Grid.Column="1" Margin="0"/>
+        </Grid>
+
+        <StackPanel x:Name="ToastHost" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    Margin="0,0,24,24" IsHitTestVisible="False"/>
+
+        <Border x:Name="LevelUpFx" Background="#AA000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="LevelUpTitle" FontSize="52" FontWeight="Bold"
+                           Foreground="{DynamicResource GoldBrush}" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="LevelUpSub" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

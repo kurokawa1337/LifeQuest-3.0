@@ -1,0 +1,121 @@
+<UserControl x:Class="LifeQuest.Views.QuestsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{DynamicResource BgBrush}">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="32,28">
+            <StackPanel>
+                <Grid>
+                    <StackPanel>
+                        <TextBlock x:Name="TitleText" Style="{StaticResource H1}"/>
+                        <TextBlock x:Name="SubText" Style="{StaticResource Muted}" Margin="0,2,0,0"/>
+                    </StackPanel>
+                    <Button x:Name="AddBtn" Click="Add_Click" Style="{StaticResource BtnPrimary}"
+                            HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                </Grid>
+
+                <TextBlock x:Name="DailyText" Style="{StaticResource Muted}" Margin="0,10,0,0"/>
+
+                <Border x:Name="BriefCard" Style="{StaticResource Card}" Margin="0,16,0,0" Padding="20">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock x:Name="BriefTitleText" Style="{StaticResource H2}"/>
+                                <TextBlock x:Name="QuoteText" FontSize="14" FontStyle="Italic" TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextBrush}" Margin="0,10,0,0"/>
+                                <TextBlock x:Name="QuoteAuthorText" Style="{StaticResource Muted}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" MinWidth="160" Margin="18,0,0,0">
+                                <TextBlock x:Name="WeatherIcon" FontSize="32" HorizontalAlignment="Right"/>
+                                <TextBlock x:Name="WeatherTemp" FontSize="22" FontWeight="Bold"
+                                           HorizontalAlignment="Right" Foreground="{DynamicResource TextBrush}"
+                                           Margin="0,2,0,0"/>
+                                <TextBlock x:Name="WeatherDesc" Style="{StaticResource Muted}" HorizontalAlignment="Right"/>
+                                <TextBlock x:Name="WeatherWind" Style="{StaticResource Muted}" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                            <TextBlock x:Name="CityLbl" Style="{StaticResource Muted}" VerticalAlignment="Center" Margin="2,0,8,0"/>
+                            <TextBox x:Name="CityBox" Style="{StaticResource Field}" Width="210"/>
+                            <Button x:Name="RefreshBtn" Click="BriefRefresh_Click" Style="{StaticResource BtnGhost}"
+                                    Margin="8,0,0,0" Padding="14,9"/>
+                        </StackPanel>
+                        <TextBlock x:Name="IdeasText" Style="{StaticResource Muted}" Margin="2,14,0,0"/>
+                        <WrapPanel x:Name="SuggRow" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" Margin="0,18,0,8">
+                    <RadioButton x:Name="FAll" Tag="all" GroupName="filter" Checked="Filter_Checked"
+                                 Style="{StaticResource ChipItem}" IsChecked="True"/>
+                    <RadioButton x:Name="FActive" Tag="active" GroupName="filter" Checked="Filter_Checked"
+                                 Style="{StaticResource ChipItem}"/>
+                    <RadioButton x:Name="FPending" Tag="pending" GroupName="filter" Checked="Filter_Checked"
+                                 Style="{StaticResource ChipItem}"/>
+                    <RadioButton x:Name="FDone" Tag="done" GroupName="filter" Checked="Filter_Checked"
+                                 Style="{StaticResource ChipItem}"/>
+                </StackPanel>
+
+                <ItemsControl x:Name="QuestList" Margin="0,10,0,0"/>
+                <TextBlock x:Name="EmptyText" Style="{StaticResource Muted}" Margin="0,20,0,0"
+                           Visibility="Collapsed" TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid x:Name="QuestModal" Background="#99000000" Visibility="Collapsed">
+            <Border Style="{StaticResource Card}" Width="440" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock x:Name="ModalTitle" Style="{StaticResource H2}" Margin="0,0,0,16"/>
+
+                    <TextBlock x:Name="MLblTitle" Style="{StaticResource Muted}" Margin="0,0,0,4"/>
+                    <TextBox x:Name="MTitle" Style="{StaticResource Field}"/>
+
+                    <TextBlock x:Name="MLblDesc" Style="{StaticResource Muted}" Margin="0,12,0,4"/>
+                    <TextBox x:Name="MDesc" Style="{StaticResource Field}" Height="70"
+                             TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top"/>
+
+                    <TextBlock x:Name="MLblDiff" Style="{StaticResource Muted}" Margin="0,12,0,4"/>
+                    <UniformGrid Columns="3">
+                        <RadioButton x:Name="DEasy" Tag="easy" GroupName="diff" Checked="Diff_Checked"
+                                     Style="{StaticResource ChipItem}" IsChecked="True" Margin="0,0,4,0"/>
+                        <RadioButton x:Name="DMedium" Tag="medium" GroupName="diff" Checked="Diff_Checked"
+                                     Style="{StaticResource ChipItem}" Margin="2,0"/>
+                        <RadioButton x:Name="DHard" Tag="hard" GroupName="diff" Checked="Diff_Checked"
+                                     Style="{StaticResource ChipItem}" Margin="4,0,0,0"/>
+                    </UniformGrid>
+
+                    <Grid Margin="0,20,0,0">
+                        <Button x:Name="MCancel" Click="ModalCancel_Click" Style="{StaticResource BtnGhost}"
+                                HorizontalAlignment="Left" Width="120"/>
+                        <Button x:Name="MSave" Click="ModalSave_Click" Style="{StaticResource BtnPrimary}"
+                                HorizontalAlignment="Right" Width="120"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="ProofModal" Background="#99000000" Visibility="Collapsed">
+            <Border Style="{StaticResource Card}" Width="440" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock x:Name="PTitle" Style="{StaticResource H2}" Margin="0,0,0,8"/>
+                    <TextBlock x:Name="PFull" Style="{StaticResource Muted}" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="PWarn" Foreground="{DynamicResource GoldBrush}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+                    <Button x:Name="PPick" Click="ProofPick_Click" Style="{StaticResource BtnGhost}" Margin="0,16,0,0"/>
+                    <TextBlock x:Name="PFileName" Style="{StaticResource Muted}" Margin="2,8,0,0"/>
+
+                    <Button x:Name="PSubmit" Click="ProofSubmit_Click" Style="{StaticResource BtnPrimary}"
+                            Margin="0,16,0,0" HorizontalAlignment="Stretch"/>
+                    <Button x:Name="PSkip" Click="ProofSkip_Click" Style="{StaticResource BtnGhost}"
+                            Margin="0,8,0,0" HorizontalAlignment="Stretch"/>
+                    <Button x:Name="PClose" Click="ProofClose_Click" Style="{StaticResource BtnGhost}"
+                            Margin="0,8,0,0" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

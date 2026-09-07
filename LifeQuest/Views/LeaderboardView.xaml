@@ -1,0 +1,11 @@
+<UserControl x:Class="LifeQuest.Views.LeaderboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{DynamicResource BgBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="32,28">
+        <StackPanel>
+            <TextBlock x:Name="TitleText" Style="{StaticResource H1}"/>
+            <ItemsControl x:Name="Board" Margin="0,20,0,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

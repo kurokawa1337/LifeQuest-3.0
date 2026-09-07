@@ -1,0 +1,26 @@
+<UserControl x:Class="LifeQuest.Views.DevView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{DynamicResource BgBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="32,28">
+        <StackPanel MaxWidth="640" HorizontalAlignment="Left">
+            <TextBlock x:Name="TitleText" Style="{StaticResource H1}"/>
+
+            <Border Style="{StaticResource Card}" Margin="0,20,0,0">
+                <StackPanel>
+                    <TextBlock x:Name="UserLbl" Style="{StaticResource Muted}" Margin="0,0,0,4"/>
+                    <ComboBox x:Name="UserSelect"/>
+
+                    <UniformGrid Columns="2" Margin="0,18,0,0">
+                        <Button x:Name="Xp100" Click="GrantXp_Click" Tag="100" Style="{StaticResource BtnGhost}" Margin="0,0,4,8"/>
+                        <Button x:Name="Xp500" Click="GrantXp_Click" Tag="500" Style="{StaticResource BtnGhost}" Margin="4,0,0,8"/>
+                        <Button x:Name="Lvl1" Click="GrantLevel_Click" Tag="1" Style="{StaticResource BtnGhost}" Margin="0,0,4,8"/>
+                        <Button x:Name="Lvl10" Click="GrantLevel_Click" Tag="10" Style="{StaticResource BtnGhost}" Margin="4,0,0,8"/>
+                        <Button x:Name="MaxLvl" Click="SetMax_Click" Style="{StaticResource BtnGhost}" Margin="0,0,4,8"/>
+                        <Button x:Name="ResetBtn" Click="Reset_Click" Style="{StaticResource BtnDanger}" Margin="4,0,0,8"/>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

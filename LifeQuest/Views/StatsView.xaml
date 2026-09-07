@@ -1,0 +1,41 @@
+<UserControl x:Class="LifeQuest.Views.StatsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{DynamicResource BgBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="32,28">
+        <StackPanel>
+            <TextBlock x:Name="TitleText" Style="{StaticResource H1}"/>
+            <ItemsControl x:Name="StatsGrid" Margin="0,20,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <Grid Margin="0,24,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock x:Name="ActivityTitle" Style="{StaticResource H2}"/>
+                        <Grid x:Name="ActivityBars" Height="130" Margin="0,14,0,0"/>
+                        <TextBlock x:Name="ActivityRange" Style="{StaticResource Muted}" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock x:Name="DiffTitle" Style="{StaticResource H2}"/>
+                        <Grid x:Name="DiffBars" Margin="0,14,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Button x:Name="PrestigeBtn" Click="Prestige_Click" Style="{StaticResource BtnDanger}"
+                    Margin="0,24,0,0" HorizontalAlignment="Stretch" Visibility="Collapsed"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
