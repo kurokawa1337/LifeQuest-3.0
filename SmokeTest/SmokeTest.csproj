@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\LifeQuest\Models\Models.cs" />
+    <Compile Include="..\LifeQuest\Services\GameLogic.cs" />
+    <Compile Include="..\LifeQuest\Services\PasswordHasher.cs" />
+    <Compile Include="..\LifeQuest\Data\Database.cs" />
+    <Compile Include="..\LifeQuest\Data\UserRepository.cs" />
+    <Compile Include="..\LifeQuest\Data\QuestRepository.cs" />
+    <Compile Include="..\LifeQuest\Services\DailyBriefService.cs" />
+  </ItemGroup>
+</Project>
